@@ -1,6 +1,7 @@
 package main
 
 import (
+	"log"
 	"net/http"
 )
 
@@ -9,6 +10,6 @@ func init() {
 		go data.biz_refresh()
 	})
 	http.HandleFunc("/debug/crash", func(w http.ResponseWriter, r *http.Request) {
-		log.Fatalln("This is to crash the app on purpose")
+		panic("This is to crash the app on purpose")
 	})
 }
