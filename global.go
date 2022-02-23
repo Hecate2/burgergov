@@ -294,7 +294,8 @@ func (me *state) biz_refresh_votes() {
 				break
 			}
 			for _, commit := range grc {
-				message := commit.GetCommit().GetMessage()
+				commitInner := commit.GetCommit()
+				message := commitInner.GetMessage()
 				match := reg.FindStringSubmatch(message)
 				if len(match) != 3 {
 					continue
@@ -303,7 +304,7 @@ func (me *state) biz_refresh_votes() {
 				if err != nil {
 					continue
 				}
-				item[voter] = state_vote{TIMESTAMP: commit.Author.CreatedAt.Time, YES: match[2] == "FOR"}
+				item[voter] = state_vote{TIMESTAMP: *commitInner.Author.Date, YES: match[2] == "FOR"}
 			}
 			if len(grc) < 100 {
 				votes[k] = item
