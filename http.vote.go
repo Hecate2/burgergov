@@ -22,7 +22,7 @@ func init() {
 	word := map[bool]string{true: "FOR", false: "AGAINST"}
 	strptr := func(v string) *string { return &v }
 
-	http.HandleFunc("/vote", func(w http.ResponseWriter, r *http.Request) {
+	http.HandleFunc("/vote", setCorsHeaders(func(w http.ResponseWriter, r *http.Request) {
 		if err := r.ParseForm(); err != nil {
 			http.Error(w, "invalid form data", http.StatusBadRequest)
 			return
@@ -133,5 +133,5 @@ func init() {
 			return
 		}
 		data.append_votes(nbipStr, scripthash{sh}, yes)
-	})
+	}))
 }

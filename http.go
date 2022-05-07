@@ -9,7 +9,7 @@ import (
 )
 
 func init() {
-	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+	http.HandleFunc("/", setCorsHeaders(func(w http.ResponseWriter, r *http.Request) {
 		result := struct {
 			Name      string
 			Timestamp int64
@@ -20,5 +20,5 @@ func init() {
 		if err := json.NewEncoder(w).Encode(result); err != nil {
 			log.Println("[ERROR]: ", err)
 		}
-	})
+	}))
 }
