@@ -29,12 +29,12 @@ func init() {
 		}
 		voter := r.Form.Get("voter")
 		if strings.HasPrefix(voter, "0x") == false {
-			http.Error(w, "invalid voter", http.StatusBadRequest)
+			http.Error(w, "invalid voter: no prefix 0x", http.StatusBadRequest)
 			return
 		}
 		sh, err := util.Uint160DecodeStringLE(voter[2:])
 		if err != nil {
-			http.Error(w, "invalid voter", http.StatusBadRequest)
+			http.Error(w, "invalid voter: failed to interpret UInt160", http.StatusBadRequest)
 			return
 		}
 		// TODO: check voter
