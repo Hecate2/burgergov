@@ -282,10 +282,10 @@ func (me *state) biz_refresh_votes() {
 	defer cancel()
 	reg := regexp.MustCompile(`^0x(\w{40}) VOTE (FOR|AGAINST) NBIP-\d+\.$`)
 	votes := make(map[string]map[scripthash]state_vote)
-	for k, v := range me.get_nbips() {
-		if v.RESULT != nil {
-			continue
-		}
+	for k, _ := range me.get_nbips() {
+		//if v.RESULT != nil {
+		//	continue
+		//}
 		for item, p := make(map[scripthash]state_vote), 1; p < 64; p++ {
 			grc, gr, err := client.Repositories.ListCommits(ctx, config.github_owner, config.github_repository, &github.CommitsListOptions{SHA: k, ListOptions: github.ListOptions{Page: p, PerPage: 100}})
 			if err != nil {
