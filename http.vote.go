@@ -29,7 +29,7 @@ func init() {
 		}
 		voter := r.Form.Get("voter")
 		if strings.HasPrefix(voter, "0x") == false {
-			http.Error(w, "invalid voter: no prefix 0x", http.StatusBadRequest)
+			http.Error(w, "invalid voter: no prefix 0x " + voter, http.StatusBadRequest)
 			return
 		}
 		sh, err := util.Uint160DecodeStringLE(voter[2:])
